@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="{{site_lang}}" class="sticky-footer">
+<head>
+  <!-- Basic declarations -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible"  content="ie=edge">
+    <meta name="viewport"               content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{page_title}} - {{site_name}}</title>
+ 
+  <!-- Meta data -->
+    <meta name="application-name"       content="{{site_name}}" />
+    <meta name="author"                 content="{{page_author}}" />
+    <meta name="copyright"              content="Copyright (C) {{page_author}}, All Rights Reserved" />
+    <meta name="description"            content="{{page_description}}" />
+    <meta name="generator"              content="Chris's Fantastic Blog Software" />
+    <meta name="keywords"               content="{{page_description}}" />
+    <meta name="robots"                 content="index,follow" />
+  
+  <!-- Web manifest -->
+    <link rel="manifest" href="{{site_root_url}}/app-manifest.json">
+ 
+  <!-- Stylesheets -->
+    <link rel="stylesheet" href="stylesheets/style.css">
+ 
+  <!-- Favicons and app icons -->
+    <!-- Generics -->
+    <link rel="icon" href="{{site_favicon_url}}" type="image/png"  />
+    <!-- Android -->
+    <link rel="shortcut icon" href="{{site_favicon_url}}">
+ 
+    <!-- Windows 8 IE 10-->
+    <meta name="msapplication-TileColor"                content="#424a50">
+    <meta name="msapplication-TileImage"                content="{{site_favicon_url}}">
+    <meta name="msapplication-navbutton-color"          content="#424a50">
+ 
+  <!-- Mobile/desktop app -->
+    <meta name="apple-mobile-web-app-capable"           content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style"  content="black-translucent">
+    <meta name="mobile-web-app-capable"                 content="yes">
+    <meta name="theme-color"                            content="#424a50" />
+ 
+  <!-- ICO Favicon -->
+    <link rel="shortcut icon"       href="{{site_favicon_url}}" />
+ 
+  <!-- Declare canonical URL -->
+    <link rel="canonical" href="{{site_root_url}}/{{page_url}}" />
+ 
+</head>
+<!-- <neck></neck> -->
+<body class="sticky-footer">          
+<div class="container">
+    {{> navbar}}
+</div> 
+   
+    <main> 
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>{{page_title}} ({{blog_entries.length}})</h1> 
+ 
+                    {{{page_content}}}
+                </div>
+
+                {{#each blog_entries}}
+                    <div class="col-12">                       
+                        <h2>
+                            {{this.title}}
+                            <br /><small>Written By: {{this.author}}</small>
+                        </h2>
+ 
+                        <p class="text-muted">
+                            Created: {{this.createdDate}}, modified: {{this.modifiedDate}}
+                        </p>    
+
+                        <p>
+                            {{this.summaryText}}
+                        </p>
+
+                        <div class="row">
+                            <div class="col-12 text-right">
+                                <form action="/delete/{{this._id}}" method="POST" class=" d-inline-block">
+                                    <button type="submit" class="btn btn-warning">Delete <i class="fa fa-trash"></i></button>
+                                </form>
+                                <form action="/update/{{this._id}}" method="POST" class=" d-inline-block">
+                                        <button type="submit" class="btn btn-secondary">Update <i class="fa fa-refresh"></i></button>   
+                                </form>
+                                <a href="#" 
+                                    class="btn btn-primary" 
+                                    type="button" 
+                                    data-toggle="collapse" 
+                                    data-target="#ec_{{@index}}" 
+                                    aria-expanded="false" 
+                                    aria-controls="ec_{{@index}}">
+                                    Show/Hide <i class="fa fa-eye"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div id="ec_{{@index}}" class="collapse clearfix">
+                            <hr />
+
+                            <p>
+                                {{this.contentText}}
+                            </p>
+                        </div>  
+                        <hr />                 
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </main>
+ 
+    <footer class="sticky-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center pt-1">
+                    &copy; {{site_name}}
+                    <i class="fa fa-desktop primary pl-5" aria-hidden="true"></i>
+                    <span class="text-small-caps">
+                        <span class="d-inline d-sm-none">xs</span>
+                        <span class="d-none d-sm-inline d-md-none">sm</span>
+                        <span class="d-none d-md-inline d-lg-none">md</span>
+                        <span class="d-none d-lg-inline d-xl-none">lg</span>
+                        <span class="d-none d-xl-inline">xl</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+ 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+ 
+</body>
+</html>

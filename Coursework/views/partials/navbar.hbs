@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark rounded my-5">
+    <a class="navbar-brand" href="#">
+        <img src="{{site_logo_url}}" style="width:30px;height:30px;"/> {{site_name}}
+    </a>
+   
+    <button class="navbar-toggler navbar-toggler-right"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarCollapse"
+            aria-controls="navbarCollapse"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+
+            {{#each page_pages}}
+                {{#unless this.hide_from_menu}}
+                <li class='nav-item'>
+                    <a href="/{{this.page_link}}" class="nav-link">
+                        {{this.page_title}}
+                    </a>
+                </li>
+                {{/unless}}
+            {{/each}}
+        </ul>
+    </div>
+</nav>

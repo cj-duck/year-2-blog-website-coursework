@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="{{site_lang}}" class="sticky-footer">
+<head>
+  <!-- Basic declarations -->
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible"  content="ie=edge">
+    <meta name="viewport"               content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{page_title}} - {{site_name}}</title>
+ 
+  <!-- Meta data -->
+    <meta name="application-name"       content="{{site_name}}" />
+    <meta name="author"                 content="{{page_author}}" />
+    <meta name="copyright"              content="Copyright (C) {{page_author}}, All Rights Reserved" />
+    <meta name="description"            content="{{page_description}}" />
+    <meta name="generator"              content="Chris's Fantastic Blog Software" />
+    <meta name="keywords"               content="{{page_description}}" />
+    <meta name="robots"                 content="index,follow" />
+   
+  <!-- Web manifest -->
+    <link rel="manifest" href="{{site_root_url}}/app-manifest.json">
+ 
+  <!-- Stylesheets -->
+    <link rel="stylesheet" href="stylesheets/style.css">
+ 
+  <!-- Favicons and app icons -->
+    <!-- Generics -->
+    <link rel="icon" href="{{site_favicon_url}}" type="image/png"  />
+    <!-- Android -->
+    <link rel="shortcut icon" href="{{site_favicon_url}}">
+ 
+    <!-- Windows 8 IE 10-->
+    <meta name="msapplication-TileColor"                content="#424a50">
+    <meta name="msapplication-TileImage"                content="{{site_favicon_url}}">
+    <meta name="msapplication-navbutton-color"          content="#424a50">
+ 
+  <!-- Mobile/desktop app -->
+    <meta name="apple-mobile-web-app-capable"           content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style"  content="black-translucent">
+    <meta name="mobile-web-app-capable"                 content="yes">
+    <meta name="theme-color"                            content="#424a50" />
+ 
+  <!-- ICO Favicon -->
+    <link rel="shortcut icon"       href="{{site_favicon_url}}" />
+ 
+  <!-- Declare canonical URL -->
+    <link rel="canonical" href="{{site_root_url}}/{{page_url}}" />
+ 
+</head>
+<!-- <neck></neck> -->
+<body class="sticky-footer">
+           
+ 
+ 
+<div class="container">
+    {{> navbar}}
+</div>
+   
+    <main> 
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h1>{{page_title}}</h1>
+ 
+                    {{{page_content}}}
+                </div>
+
+                <div class="col-12">
+                    <hr />
+                </div>
+
+                <div class="col-12">
+                    <form action="/updateBlog" method="POST">
+                        <input type="hidden" name="_id" value="{{{updateBlog._id}}}">
+                        <input type="hidden" name="createdDate" value="{{{updateBlog.createdDate}}}" />
+
+                        <fieldset class="form-group">
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label" for="title">Title</label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="{{{updateBlog.title}}}" name="title" />
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-2 col-form-label" for="author">Author name</label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="{{{updateBlog.author}}}" name="author" />
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-2 col-form-label" for="category">Category</label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" value="{{{updateBlog.category}}}" name="category" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label" for="summaryText">Summary</label>
+                                <div class="col-10">
+                                    <textarea class="form-control" name="summaryText">{{{updateBlog.summaryText}}}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label" for="contentText">Content</label>
+                                <div class="col-10">
+                                    <textarea class="form-control" name="contentText">{{{updateBlog.contentText}}}</textarea>
+                                </div>
+                            </div>
+                        
+                        <!-- remove this, be auto -->
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label" for="modifiedDate">modifiedDate</label>
+                                <div class="col-10">
+                                    <input class="form-control" type="text" placeholder="Modified Date" name="modifiedDate" />
+                                </div>
+                            </div>
+                        <!-- ///end -->
+
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label" for="published">Status</label>
+                                <div class="col-10">
+                                    <select class="form-control" id="published" name="published">
+                                        <option value="false"{{#unless updateBlog.published}} selected{{/unless}}>Draft</option>
+                                        <option value="true"{{#if updateBlog.published}} selected{{/if}}>Published</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <div class="col-4 ml-auto">
+                                    <div class="btn-group float-right">
+                                        <a href="/allBlogs" class="btn btn-secondary">Cancel</a>
+                                        <button type ="submit" class="btn btn-primary float-right">
+                                            Save Changes <i class="fa fa-floppy"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+ 
+    <footer class="sticky-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center pt-1">
+                    &copy; {{site_name}}
+                    <i class="fa fa-desktop primary pl-5" aria-hidden="true"></i>
+                    <span class="text-small-caps">
+                        <span class="d-inline d-sm-none">xs</span>
+                        <span class="d-none d-sm-inline d-md-none">sm</span>
+                        <span class="d-none d-md-inline d-lg-none">md</span>
+                        <span class="d-none d-lg-inline d-xl-none">lg</span>
+                        <span class="d-none d-xl-inline">xl</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </footer>
+ 
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+ 
+</body>
+</html>
